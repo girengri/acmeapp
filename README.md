@@ -11,7 +11,7 @@ Puede verlo aquí: <https://acmeoetapp.000webhostapp.com//>
 ## 🔥 Instalación
 
 ```shell
-git clone https://github.com/girengri/league-of-legends.git
+git clone https://github.com/girengri/acmeapp.git
 ```
 - En el archivo db.php indicar los datos de la base de datos local
 - En el archivo header.php indicar la url base del servidor donde se encuentra el proyecto
