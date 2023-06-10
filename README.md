@@ -19,8 +19,12 @@ git clone https://github.com/girengri/league-of-legends.git
 ## 🔍 Vistas 
 
 ### 💻 Escritorio
- 
 
+![logo](https://res.cloudinary.com/girengri/image/upload/v1686363869/ACME/creis9olptjvvhsn70o2.png)
+![logo](https://res.cloudinary.com/girengri/image/upload/v1686363869/ACME/rki7xevmbm7bfh5jeog4.png)
+![logo](https://res.cloudinary.com/girengri/image/upload/v1686363869/ACME/wo6ercmn8cvucrrvrhwj.png)
+![logo](https://res.cloudinary.com/girengri/image/upload/v1686363868/ACME/l8yaqak1iznuiygmbiz7.png)
+ 
 
 ## 📌 Stack
 
