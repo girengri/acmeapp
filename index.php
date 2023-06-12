@@ -1,15 +1,17 @@
 <?php
 include("db.php");
 
-$sentencia = $conexion->prepare("SELECT marca, color, 
-tbl_conductores.primernombre AS primernombreconductor, tbl_conductores.segundonombre AS segundonombreconductor, 
-tbl_conductores.primerapellido AS primerapellidoconductor, tbl_conductores.segundoapellido AS segundoapellidoconductor,
-tbl_propietarios.primernombre AS primernombrepropietario, tbl_propietarios.segundonombre AS segundonombrepropietario, 
-tbl_propietarios.primerapellido AS primerapellidopropietario, tbl_propietarios.segundoapellido AS segundoapellidopropietario
+$sentencia = $conexion->prepare("
+SELECT placa,marca,
+(SELECT primernombre FROM tbl_conductores WHERE tbl_conductores.cedula = tbl_vehiculos.cedula_conductor LIMIT 1) AS primernombreconductor,
+(SELECT segundonombre FROM tbl_conductores WHERE tbl_conductores.cedula = tbl_vehiculos.cedula_conductor LIMIT 1) AS segundonombreconductor,
+(SELECT primerapellido FROM tbl_conductores WHERE tbl_conductores.cedula = tbl_vehiculos.cedula_conductor LIMIT 1) AS primerapellidoconductor,
+(SELECT segundoapellido FROM tbl_conductores WHERE tbl_conductores.cedula = tbl_vehiculos.cedula_conductor LIMIT 1) AS segundoapellidoconductor,
+(SELECT primernombre FROM tbl_propietarios WHERE tbl_propietarios.cedula = tbl_vehiculos.cedula_propietario LIMIT 1) AS primernombrepropietario,
+(SELECT segundonombre FROM tbl_propietarios WHERE tbl_propietarios.cedula = tbl_vehiculos.cedula_propietario LIMIT 1) AS segundonombrepropietario,
+(SELECT primerapellido FROM tbl_propietarios WHERE tbl_propietarios.cedula = tbl_vehiculos.cedula_propietario LIMIT 1) AS primerapellidopropietario,
+(SELECT segundoapellido FROM tbl_propietarios WHERE tbl_propietarios.cedula = tbl_vehiculos.cedula_propietario LIMIT 1) AS segundoapellidopropietario
 FROM tbl_vehiculos
-INNER JOIN tbl_conductores, tbl_propietarios
-WHERE tbl_vehiculos.cedula_conductor=tbl_conductores.cedula
-AND tbl_vehiculos.cedula_propietario=tbl_propietarios.cedula;
 ");
 
 $sentencia->execute();
@@ -40,8 +42,8 @@ $tbl_informes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
                     <?php foreach ($tbl_informes as $informe) { ?>
                         <tr class="">
-                            <td scope="row"><?php echo $informe["marca"] ?></td>
-                            <td><?php echo $informe["color"] ?></td>
+                            <td scope="row"><?php echo $informe["placa"] ?></td>
+                            <td><?php echo $informe["marca"] ?></td>
                             <td><?php echo $informe["primernombreconductor"] . " " . $informe["segundonombreconductor"] . " " . $informe["primerapellidoconductor"] . " " . $informe["segundoapellidoconductor"] ?></td>
                             <td><?php echo $informe["primernombrepropietario"] . " " . $informe["segundonombrepropietario"] . " " . $informe["primerapellidopropietario"] . " " . $informe["segundoapellidopropietario"] ?></td>
                         </tr>
