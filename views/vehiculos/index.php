@@ -11,7 +11,17 @@ if (isset($_GET["txtID"])) {
     header("Location:index.php");
 }
 
-$sentencia = $conexion->prepare("SELECT * , (SELECT primernombre FROM tbl_conductores WHERE tbl_conductores.cedula = tbl_vehiculos.cedula_conductor LIMIT 1) AS nombreconductor,  (SELECT primerapellido FROM tbl_conductores WHERE tbl_conductores.cedula = tbl_vehiculos.cedula_conductor LIMIT 1) AS apellidoconductor, (SELECT primernombre FROM tbl_propietarios WHERE tbl_propietarios.cedula = tbl_vehiculos.cedula_propietario LIMIT 1) AS nombrepropietario, (SELECT primerapellido FROM tbl_propietarios WHERE tbl_propietarios.cedula = tbl_vehiculos.cedula_propietario LIMIT 1) AS apellidopropietario FROM tbl_vehiculos");
+$sentencia = $conexion->prepare("
+SELECT placa, color, marca, tipodevehiculo ,
+tbl_conductores.primernombre AS nombreconductor,  
+tbl_conductores.primerapellido AS apellidoconductor,
+tbl_propietarios.primernombre AS nombrepropietario,
+tbl_propietarios.primerapellido AS apellidopropietario 
+FROM tbl_vehiculos
+INNER JOIN  tbl_conductores, tbl_propietarios
+WHERE cedula_conductor = tbl_conductores.cedula
+AND cedula_propietario = tbl_propietarios.cedula
+");
 $sentencia->execute();
 $lista_tbl_vehiculos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
