@@ -2,11 +2,15 @@
 include("db.php");
 
 $sentencia = $conexion->prepare("
-SELECT placa, color, marca, tipodevehiculo ,
-tbl_conductores.primernombre AS nombreconductor,  
-tbl_conductores.primerapellido AS apellidoconductor,
-tbl_propietarios.primernombre AS nombrepropietario,
-tbl_propietarios.primerapellido AS apellidopropietario 
+SELECT placa, marca,
+tbl_conductores.primernombre AS primernombreconductor,  
+tbl_conductores.segundonombre AS segundonombreconductor,  
+tbl_conductores.primerapellido AS primerapellidoconductor,
+tbl_conductores.segundoapellido AS segundoapellidoconductor,
+tbl_propietarios.primernombre AS primernombrepropietario,
+tbl_propietarios.segundonombre AS segundonombrepropietario,
+tbl_propietarios.primerapellido AS primerapellidopropietario ,
+tbl_propietarios.segundoapellido AS segundoapellidopropietario 
 FROM tbl_vehiculos
 INNER JOIN  tbl_conductores, tbl_propietarios
 WHERE cedula_conductor = tbl_conductores.cedula
